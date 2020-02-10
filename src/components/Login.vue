@@ -1,10 +1,10 @@
 <template>
     <div class="login">
         <h1>PXL Shop</h1>
-        <LabeledInput labelText="Username"/>
-        <LabeledInput labelText="Password"/>
+        <LabeledInput labelText="Username" v-model="username" type="text"/>
+        <LabeledInput labelText="Password" v-model="password" type="password"/>
         <p>Don't have an account yet? Register <a @click="$emit('show-form')">here</a></p>
-        <BirdButton />
+        <BirdButton v-on:login-pressed="handleLogin" />
     </div>
 </template>
 
@@ -17,6 +17,27 @@
         components: {
             LabeledInput,
             BirdButton
+        },
+        props:{
+            apiUrl: String,
+            userData: Array
+        },
+        data() {
+            return{
+                username: '',
+                password: ''
+            }
+        },
+        methods:{
+            handleLogin(){
+                let user = this.userData.find(user => user.username === this.username);
+
+                if(user){
+                    if(user.password === this.password){
+                        this.$emit('successful-login')
+                    }
+                }
+            }
         }
     }
 </script>

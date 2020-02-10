@@ -1,15 +1,26 @@
 <template>
     <div class="labeledInput">
         <label>{{labelText}}</label>
-        <input type="text" @change="$emit('input-changed', 'inputName', this.value)"/>
+        <input :type="type"
+               v-model="inputValue"
+        />
     </div>
 </template>
 
 <script>
     export default {
         name: "LabeledInput",
-        props: ["labelText",
-            "inputName"],
+        props: ["labelText", "value", "type"],
+        computed: {
+            inputValue: {
+                get() {
+                    return this.value;
+                },
+                set(val) {
+                    this.$emit('input', val);
+                }
+            }
+        }
     }
 </script>
 

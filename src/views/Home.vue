@@ -3,8 +3,10 @@
         <img alt="PXL logo" src="../assets/logo_pxl_bol.png">
         <Login v-bind:class="{ hide: formIsVisible }"
                v-on:show-form="formIsVisible = !formIsVisible"
+               :api-url="apiUrl"
+               :user-data="userData"
         />
-        <RegistrationForm class="registrationForm"
+        <RegistrationForm
                           v-bind:class="{ show: formIsVisible }"
                           v-bind:api-url="apiUrl"
         />

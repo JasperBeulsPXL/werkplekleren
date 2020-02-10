@@ -12,7 +12,7 @@ new Vue({
     router,
     store,
     render: function (createElement) {
-        let vm =this;
+        let vm = this;
 
         return createElement(App, {
                 props: {
@@ -25,7 +25,12 @@ new Vue({
     data() {
         return {
             apiUrl: 'define url here',
-            userData: []
+            userData: [
+                {
+                    username: 'jasper',
+                    password: 'beuls'
+                }
+            ]
         }
     },
     created: function () {
