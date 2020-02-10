@@ -36,7 +36,7 @@
                 if(user && user.password === this.password){
                         this.$emit('login-user', {success: true,  username:user.username, password:user.password});
                 }else{
-                    this.$emit('login-user', {success: false, username:user.username, password:user.password});
+                    this.$emit('login-user', {success: false});
                 }
             }
         }
