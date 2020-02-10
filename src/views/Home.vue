@@ -1,44 +1,67 @@
 <template>
     <div class="home">
-        <img alt="Vue logo" src="../assets/logo.png">
-        <Login/>
+        <img alt="PXL logo" src="../assets/logo_pxl_bol.png">
+        <Login v-bind:class="{ hide: formIsVisible }"
+               v-on:show-form="formIsVisible = !formIsVisible"
+        />
+        <RegistrationForm class="registrationForm"
+                          v-bind:class="{ show: formIsVisible }"
+                          v-bind:api-url="apiUrl"
+        />
     </div>
 </template>
 
 <script>
     // @ is an alias to /src
     import Login from '@/components/Login.vue';
+    import RegistrationForm from "@/components/RegistrationForm";
 
     export default {
         name: 'Home',
         components: {
-            Login
+            Login,
+            RegistrationForm
+        },
+        props: {
+            apiUrl: String,
+            userData: Array
         },
         data() {
             return {
-                users: [
-                    {
-                        username: "jasper",
-                        password: "pxl123"
-                    },
-                ]
+                formIsVisible: false,
             };
-        }
+        },
     }
 </script>
 
 <style lang="scss" scoped>
-    .home{
+    .home {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         height: 100%;
-        //background-color: $secondary-color;
     }
 
-    @media (min-width: $desktop-min-width){
-        .home{
+    img {
+        max-width: 200px;
+        max-height: 200px;
+    }
+
+    .registrationForm {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    @media (min-width: $desktop-min-width) {
+        .home {
             width: 75%;
         }
     }

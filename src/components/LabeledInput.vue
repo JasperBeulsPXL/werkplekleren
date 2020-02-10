@@ -1,14 +1,15 @@
 <template>
     <div class="labeledInput">
         <label>{{labelText}}</label>
-        <input type="text"/>
+        <input type="text" @change="$emit('input-changed', 'inputName', this.value)"/>
     </div>
 </template>
 
 <script>
     export default {
         name: "LabeledInput",
-        props: ["labelText"],
+        props: ["labelText",
+            "inputName"],
     }
 </script>
 

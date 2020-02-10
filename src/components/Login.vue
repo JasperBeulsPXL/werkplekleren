@@ -3,6 +3,7 @@
         <h1>PXL Shop</h1>
         <LabeledInput labelText="Username"/>
         <LabeledInput labelText="Password"/>
+        <p>Don't have an account yet? Register <a @click="$emit('show-form')">here</a></p>
         <BirdButton />
     </div>
 </template>
@@ -16,7 +17,7 @@
         components: {
             LabeledInput,
             BirdButton
-        },
+        }
     }
 </script>
 
@@ -27,7 +28,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
     }
 
     h1{
@@ -37,5 +37,13 @@
 
     a {
         color: #42b983;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+    p{
+        margin-top: 30px;
     }
 </style>

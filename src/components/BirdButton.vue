@@ -79,7 +79,7 @@
             border-radius: 5px;
             position: relative;
             opacity: 1;
-            transform: translateY(50%);
+            transform: translateY(10%);
             padding: 0;
             border: none;
             display: flex;
@@ -100,6 +100,7 @@
                 outline: none;
             }
             &:hover{
+                cursor: pointer;
                 .bird--30{
                     left: 600px;
                     top: -550px;

@@ -2,13 +2,21 @@
     <div id="app">
         <div id="nav">
             <router-link to="/">Home</router-link>
-            |
             <router-link to="/about">About</router-link>
         </div>
-        <router-view/>
+        <router-view :user-data="userData" :api-url="apiUrl"/>
     </div>
 </template>
 
+<script>
+    export default {
+        name: 'app',
+        props:{
+            apiUrl: String,
+            userData: Array
+        }
+    }
+</script>
 <style lang="scss">
     * {
         box-sizing: border-box;
