@@ -1,10 +1,14 @@
 <template>
     <div id="app">
-        <div id="nav">
+        <!--<div id="nav">
             <router-link to="/">Home</router-link>
             <router-link to="/about">About</router-link>
-        </div>
-        <router-view :user-data="userData" :api-url="apiUrl"/>
+        </div>-->
+        <router-view :user-data="userData"
+                     :api-url="apiUrl"
+                     :logged-in-user="loggedInUser"
+                     v-on:login-user="loginUser"
+        />
     </div>
 </template>
 
@@ -13,7 +17,13 @@
         name: 'app',
         props:{
             apiUrl: String,
-            userData: Array
+            userData: Array,
+            loggedInUser: Object,
+        },
+        methods:{
+            loginUser(user){
+                this.$emit('login-user', user);
+            }
         }
     }
 </script>
@@ -40,6 +50,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 100px;
     }
 
     #nav {

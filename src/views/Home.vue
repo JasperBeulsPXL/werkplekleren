@@ -5,6 +5,8 @@
                v-on:show-form="formIsVisible = !formIsVisible"
                :api-url="apiUrl"
                :user-data="userData"
+               :logged-in-user="loggedInUser"
+               v-on:login-user="loginUser"
         />
         <RegistrationForm
                           v-bind:class="{ show: formIsVisible }"
@@ -26,13 +28,19 @@
         },
         props: {
             apiUrl: String,
-            userData: Array
+            userData: Array,
+            loggedInUser: Object,
         },
         data() {
             return {
                 formIsVisible: false,
             };
         },
+        methods:{
+            loginUser(user){
+                this.$emit('login-user', user);
+            }
+        }
     }
 </script>
 
@@ -55,7 +63,7 @@
     }
 
     .show {
-        display: block;
+        display: flex;
     }
 
     .hide {

@@ -128,6 +128,7 @@
     }
 
     button:hover {
+        cursor: pointer;
         text-shadow: 0 0 2em rgba(255, 255, 255, 1);
         color: black;
         border-color: black;

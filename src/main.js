@@ -12,12 +12,18 @@ new Vue({
     router,
     store,
     render: function (createElement) {
-        let vm = this;
+        let self = this;
 
         return createElement(App, {
                 props: {
-                    apiUrl: vm.apiUrl,
-                    userData: vm.userData
+                    apiUrl: self.apiUrl,
+                    userData: self.userData,
+                    loggedInUser: self.loggedInUser,
+                },
+                on: {
+                    'login-user': function (user) {
+                        self.loginUser(user);
+                    }
                 }
             }
         )
@@ -30,7 +36,11 @@ new Vue({
                     username: 'jasper',
                     password: 'beuls'
                 }
-            ]
+            ],
+            loggedInUser: {
+                username: '',
+                password: '',
+            }
         }
     },
     created: function () {
@@ -46,17 +56,33 @@ new Vue({
             })
     },
     mounted: function () {
+        let self = this;
         let el = document.querySelector(".button-bird");
         let text = document.querySelector(".button-bird__text");
         el.addEventListener('click', function () {
             el.classList.toggle('active');
 
             if (el.classList.contains('active')) {
-                console.log('true');
-                text.innerHTML = 'WELCOME';
+                if ( self.loggedInUser.username !== '' && self.loggedInUser.password !== '') {
+                    text.innerHTML = 'WELCOME'
+                } else {
+                    text.innerHTML = 'LOGIN FAILED';
+                }
+
             } else {
                 text.innerHTML = 'LOGIN';
             }
         });
-    }
+    },
+    methods: {
+        loginUser: function (user) {
+            if (user.success) {
+                this.loggedInUser.username = user.username;
+                this.loggedInUser.password = user.password;
+            }else{
+                this.loggedInUser.username = '';
+                this.loggedInUser.password = '';
+            }
+        }
+    },
 }).$mount('#app');

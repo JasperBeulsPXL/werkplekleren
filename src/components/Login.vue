@@ -4,7 +4,7 @@
         <LabeledInput labelText="Username" v-model="username" type="text"/>
         <LabeledInput labelText="Password" v-model="password" type="password"/>
         <p>Don't have an account yet? Register <a @click="$emit('show-form')">here</a></p>
-        <BirdButton v-on:login-pressed="handleLogin" />
+        <BirdButton id="birdButton" v-on:login-pressed="handleLogin" />
     </div>
 </template>
 
@@ -20,7 +20,8 @@
         },
         props:{
             apiUrl: String,
-            userData: Array
+            userData: Array,
+            loggedInUser: Object,
         },
         data() {
             return{
@@ -32,10 +33,10 @@
             handleLogin(){
                 let user = this.userData.find(user => user.username === this.username);
 
-                if(user){
-                    if(user.password === this.password){
-                        this.$emit('successful-login')
-                    }
+                if(user && user.password === this.password){
+                        this.$emit('login-user', {success: true,  username:user.username, password:user.password});
+                }else{
+                    this.$emit('login-user', {success: false, username:user.username, password:user.password});
                 }
             }
         }
